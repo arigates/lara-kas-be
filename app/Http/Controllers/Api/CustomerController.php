@@ -32,7 +32,7 @@ class CustomerController extends Controller
         }
 
         $customers = $customers->where('company_id', '=', $company->id);
-        $customers = $customers->orderBy('name')->get();
+        $customers = $customers->orderBy('updated_at', 'desc')->get();
 
         return CustomerResource::collection($customers);
     }
