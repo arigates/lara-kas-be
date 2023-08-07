@@ -73,6 +73,19 @@ class CustomerController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function showPublic(string $id): JsonResponse
+    {
+        $customer = Customer::with('ArAps')->find($id);
+        if (! $customer) {
+            return $this->notFoundResponse();
+        }
+
+        return $this->showedResponse(new CustomerResource($customer));
+    }
+
+    /**
      * Update the specified resource in storage.
      */
     public function update(CustomerUpdateRequest $request, string $id): JsonResponse
