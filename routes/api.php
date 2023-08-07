@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::get('/customers/public/{customer}', [CustomerController::class, 'showPublic']);
+Route::get('/ar-ap/public', [ArApController::class, 'indexPublic']);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();

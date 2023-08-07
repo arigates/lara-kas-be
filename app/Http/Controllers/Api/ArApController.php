@@ -39,6 +39,18 @@ class ArApController extends Controller
         return ArApResource::collection($ArAps);
     }
 
+    public function indexPublic(Request $request): AnonymousResourceCollection
+    {
+        if (! $request->has('customer_id')) {
+            abort(404);
+        }
+
+        $customerId = $request->customer_id;
+        $ArAps = ArAp::where('customer_id', '=', $customerId)->orderBy('date', 'desc')->orderBy('created_at', 'desc')->get();
+
+        return ArApResource::collection($ArAps);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
